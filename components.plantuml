@@ -1,0 +1,93 @@
+@startuml 
+
+abstract class Component{
+name
+draw()
+}
+
+class Connector{
+}
+
+class SingleInputComponent{
+ApplyLogic()
+}
+class DualInputComponent{
+}
+
+class LogicalDualInputComponent{
+applyLogic()
+logicalTable = []
+}
+
+class PowerSource{
+switchOn()
+}
+
+class Connection
+
+class AndGate{
+logicalTable = [False, False, False, True]
+}
+
+class NandGate{
+logicalTable = [logic]
+}
+
+class OrGate{
+logicalTable = [False, True, True, True]
+}
+
+class Switch{
+handleClicked()
+applyLogic()
+}
+
+class NotGate{
+applyLogic()
+}
+
+class XorGate{
+logicalTable = [False, True, True, False]
+}
+
+class XnorGate{
+logicalTable = [True, False, False, True]
+}
+
+class Switch12{
+handleClicked()
+applyLogic()
+}
+
+class Switch21{
+handleClicked()
+propagate()
+}
+
+class Lamp{
+}
+
+
+Component <|-- SingleInputComponent
+Component <|-- DualInputComponent
+Component <|-- PowerSource
+Component <|-- Connector
+Component <|-- Connection
+
+DualInputComponent <|-- Switch21
+DualInputComponent <|-- LogicalDualInputComponent
+LogicalDualInputComponent <|-- AndGate
+LogicalDualInputComponent <|-- NandGate
+LogicalDualInputComponent <|-- OrGate
+LogicalDualInputComponent <|-- XorGate
+LogicalDualInputComponent <|-- XnorGate
+
+SingleInputComponent <|-- Switch
+SingleInputComponent <|-- NotGate
+SingleInputComponent <|-- PowerSource
+SingleInputComponent <|-- Lamp
+
+
+SingleInputComponent <|-- Switch12
+
+@enduml

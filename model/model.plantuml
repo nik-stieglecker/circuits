@@ -1,0 +1,95 @@
+@startuml 
+
+abstract class Component{
+name
+applyLogic()
+draw()
+}
+
+class GfxContext
+
+class Connector{
+}
+
+class SingleInputComponent{
+}
+class DualInputComponent{
+}
+
+class LogicalDualInputComponent{
+logicalTable = []
+}
+
+class PowerSource{
+switchOn()
+}
+
+class Connection
+
+class AndGate{
+logicalTable = [False, False, False, True]
+}
+
+class NandGate{
+logicalTable = [True, True, True, False]
+}
+
+class OrGate{
+logicalTable = [False, True, True, True]
+}
+
+class Switch{
+}
+
+class NotGate{
+}
+
+class XorGate{
+logicalTable = [False, True, True, False]
+}
+
+class XnorGate{
+logicalTable = [True, False, False, True]
+}
+
+class Switch12{
+}
+
+class Switch21{
+}
+
+class Lamp{
+}
+
+
+
+Component <|-- SingleInputComponent
+Component <|-- DualInputComponent
+Component <|-- PowerSource
+Component <|-- Connector
+
+DualInputComponent <|-- Switch21
+DualInputComponent <|-- LogicalDualInputComponent
+LogicalDualInputComponent <|-- AndGate
+LogicalDualInputComponent <|-- NandGate
+LogicalDualInputComponent <|-- OrGate
+LogicalDualInputComponent <|-- XorGate
+LogicalDualInputComponent <|-- XnorGate
+
+SingleInputComponent <|-- Switch
+SingleInputComponent <|-- NotGate
+SingleInputComponent <|-- PowerSource
+SingleInputComponent <|-- Lamp
+
+
+SingleInputComponent <|-- Switch12
+
+class Board 
+
+
+Board "1" -- "*" Component
+Board "1" -- "1" PowerSource
+Component "1" -- "*" Connection : incoming
+Component "1" -- "*" Connection : outgoing
+
+@enduml
