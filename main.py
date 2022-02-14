@@ -632,10 +632,10 @@ def main():
     Logger.info("creating board...")
 
     
-    # board, printSize, rasterCount, () = createOrGateBoard()
+    board, printSize, rasterCount, (s1, s2) = createSwitch12Board
     # board, printSize, rasterCount, () = createBitAddingBoard()
     # board, printSize, rasterCount, () = createCarryBitBoard()
-    board, printSize, rasterCount, (s1, s2, s3) = create3BitAddingBoard()
+    # board, printSize, rasterCount, (s1, s2, s3) = create3BitAddingBoard()
     # board, printSize, rasterCount, (s1, s2) = createCarryBitBoard()
     
     printContext = createPrintContext(printSize, rasterCount)
