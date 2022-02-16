@@ -39,126 +39,28 @@ def nextPos():
         
     return rasterX, rasterY
 
-def createSimpleBoard():
-    
-    # simple board for testing
-    
-    board = Board.Board()
-    
-    powerSource = board.addComponent(PowerSource.PowerSource(nextPos()))
-    toLamp = board.addComponent(Connector.Connector(nextPos(), "to Lamp"))
-    lamp = board.addComponent(Lamp.Lamp(nextPos()))
-    fromLamp = board.addComponent(Connector.Connector(nextPos(), "from Lamp"))        
-    
-    board.connect(powerSource, toLamp)
-    board.connect(toLamp, lamp)
-    board.connect(lamp, fromLamp)
-    board.connect(fromLamp, powerSource)
+def createAndGateBoard():
 
-    rasterCount = (80, 40)
-    rasterSize = 20
-    printSize = (rasterCount[0] * rasterSize, rasterCount[1] * rasterSize)
+    # AND gate made with 2 switches
     
-    return board, printSize, rasterCount
-
-def createBitAddingBoard():
-     
-     
     board = Board.Board();
-     
-    powerSource = board.addComponent(PowerSource.PowerSource(nextPos(), ))
-    c1 = board.addComponent(Connector.Connector(nextPos(), "to Connector"))
-    c2_1 = board.addComponent(Connector.Connector(nextPos(), "to Switch 1"))            
-    c2_2 = board.addComponent(Connector.Connector(nextPos(), "to Switch 2"))
-    s1 = board.addComponent(Switch.Switch(nextPos(), "Switch 1"))
-    s2 = board.addComponent(Switch.Switch(nextPos(), "Switch 2")) 
-    c3_1 = board.addComponent(Connector.Connector(nextPos(), "to XorGate in 1"))
-    c3_2 = board.addComponent(Connector.Connector(nextPos(), "to XorGate in 2"))
-    xorGate = board.addComponent(XorGate.XorGate(nextPos(), ))
-    c4 = board.addComponent(Connector.Connector(nextPos(), "to Lamp"))    
-    lamp = board.addComponent(Lamp.Lamp(nextPos(), ))
-    c5 = board.addComponent(Connector.Connector(nextPos(), "to PowerSource"))    
- 
-    board.connect(powerSource, c1)
- 
-    board.connect(c1, c2_1)
-    board.connect(c2_1, s1)
-    board.connect(s1, c3_1)
-    board.connect(c3_1, xorGate)
-     
-    board.connect(c1, c2_2)
-    board.connect(c2_2, s2)
-    board.connect(s2, c3_2)
-    board.connect(c3_2, xorGate)
-     
-    board.connect(xorGate, c4)
-    board.connect(c4, lamp)
-    board.connect(lamp, c5)
-    board.connect(c5, powerSource)
-     
-    s1.setClosed(True)
-    s2.setClosed(False)   
-      
-    rasterCount = (80, 40)
-    rasterSize = 20
-    printSize = (rasterCount[0] * rasterSize, rasterCount[1] * rasterSize)
+    powerSource = board.addComponent(PowerSource.PowerSource((4, 3), "Power", Rotate.ROTATE90))
+    s1 = board.addComponent(Switch.Switch((9, 3), "A", Rotate.ROTATE90))
+    s2 = board.addComponent(Switch.Switch((13, 3), "B", Rotate.ROTATE90))
+    c1 = board.addComponent(Connector.Connector((17, 3), ""))
+    c2 = board.addComponent(Connector.Connector((17, 8), ""))       
+    c3 = board.addComponent(Connector.Connector((1, 8), ""))
+    out = board.addComponent(Lamp.Lamp((11 ,8 ), "OUT", Rotate.ROTATE270))        
     
-    return board, printSize, rasterCount
-
-
-def createCarryBitBoard():
-     
-    board = Board.Board();
-     
-    powerSource = board.addComponent(PowerSource.PowerSource((3, 4), "Power"))
-    c1 = board.addComponent(Connector.Connector((3, 10), ""))
-    c2 = board.addComponent(Connector.Connector((3, 16), ""))
-    s1 = board.addComponent(Switch.Switch((7, 10), "", Rotate.ROTATE90))
-    s2 = board.addComponent(Switch.Switch((7, 16), "", Rotate.ROTATE90)) 
- 
-    andGate = board.addComponent(AndGate.AndGate((25, 16), "AND", Rotate.ROTATE90))
-    c3 = board.addComponent(Connector.Connector((38, 16), ""))
-    c4 = board.addComponent(Connector.Connector((38, 10), ""))
-          
-    xorGate = board.addComponent(XorGate.XorGate((25, 10), "XOR", Rotate.ROTATE90))
-       
-    lamp = board.addComponent(Lamp.Lamp((34, 10), "result", Rotate.ROTATE90))
-    # lamp for result
-    
-    lamp_c = board.addComponent(Lamp.Lamp((34, 16), "carry bit", Rotate.ROTATE90))
-    # lamp for carry bit
-    
-    c5 = board.addComponent(Connector.Connector((38, 1), ""))
-    
-    # lamps to represent if the input is 1 or 0
-    lamp1 = board.addComponent(Lamp.Lamp((13, 10), "a", Rotate.ROTATE90))
-    lamp2 = board.addComponent(Lamp.Lamp((13, 16), "b", Rotate.ROTATE90))
- 
-    board.connect(powerSource, c1)
-     
-    board.connect(c1, s1)
-    board.connect(c1, c2)
-    board.connect(c2, s2)
-     
-    board.connect(s2, lamp2)
-    board.connect(lamp2, xorGate)
-     
-    board.connect(s1, lamp1)
-    board.connect(lamp1, xorGate)
-     
-    board.connect(lamp2, andGate) 
-    board.connect(lamp1, andGate)         
- 
-    board.connect(andGate, lamp_c)
-    board.connect(lamp_c, c3)
-    board.connect(c3, c4)
-    
-    board.connect(c4, c5) 
-    board.connect(xorGate, lamp)
-    board.connect(lamp, c4)
-    board.connect(c5, powerSource)
-     
-    rasterCount = (39, 19)
+    board.connect(powerSource, s1)    
+    board.connect(s1, s2)
+    board.connect(s2, c1)    
+    board.connect(c1, c2)    
+    board.connect(c2, out)
+    board.connect(out, c3)    
+    board.connect(c3, powerSource)
+              
+    rasterCount = (18, 10)
     rasterSize = 80
     printSize = (rasterCount[0] * rasterSize, rasterCount[1] * rasterSize)
  
@@ -191,33 +93,6 @@ def createOrGateBoard():
     board.connect(c5, powerSource)
 
     rasterCount = (14, 11)
-    rasterSize = 80
-    printSize = (rasterCount[0] * rasterSize, rasterCount[1] * rasterSize)
- 
-    return board, printSize, rasterCount, (s1, s2)
-
-def createAndGateBoard():
-
-    # AND gate made with 2 switches
-    
-    board = Board.Board();
-    powerSource = board.addComponent(PowerSource.PowerSource((4, 3), "Power", Rotate.ROTATE90))
-    s1 = board.addComponent(Switch.Switch((9, 3), "A", Rotate.ROTATE90))
-    s2 = board.addComponent(Switch.Switch((13, 3), "B", Rotate.ROTATE90))
-    c1 = board.addComponent(Connector.Connector((17, 3), ""))
-    c2 = board.addComponent(Connector.Connector((17, 8), ""))       
-    c3 = board.addComponent(Connector.Connector((1, 8), ""))
-    out = board.addComponent(Lamp.Lamp((11 ,8 ), "OUT", Rotate.ROTATE270))        
-    
-    board.connect(powerSource, s1)    
-    board.connect(s1, s2)
-    board.connect(s2, c1)    
-    board.connect(c1, c2)    
-    board.connect(c2, out)
-    board.connect(out, c3)    
-    board.connect(c3, powerSource)
-              
-    rasterCount = (18, 10)
     rasterSize = 80
     printSize = (rasterCount[0] * rasterSize, rasterCount[1] * rasterSize)
  
@@ -284,7 +159,6 @@ def createSwitch12Board():
     board.connect(lamp, c_b)
     board.connect(c_b, powerSource)  
     
-    
     rasterCount = (7, 5)
     rasterSize = 80
     printSize = (rasterCount[0] * rasterSize, rasterCount[1] * rasterSize)
@@ -314,7 +188,6 @@ def createXorGateBoard():
 
     board.connect(s1, s2)
     board.connect(s1, s2) 
-
      
     board.connect(s2, lamp)
     
@@ -326,6 +199,69 @@ def createXorGateBoard():
     rasterSize = 80
     printSize = (rasterCount[0] * rasterSize, rasterCount[1] * rasterSize)
 
+    return board, printSize, rasterCount, (s1, s2)
+
+def create2BitAddingBoard():
+     
+    # circuit for adding 2 bits
+     
+    board = Board.Board();
+     
+    powerSource = board.addComponent(PowerSource.PowerSource((3, 4), "Power"))
+    
+    c1 = board.addComponent(Connector.Connector((3, 10), ""))
+    c2 = board.addComponent(Connector.Connector((3, 16), ""))
+    c3 = board.addComponent(Connector.Connector((38, 16), ""))
+    c4 = board.addComponent(Connector.Connector((38, 10), ""))        
+    c5 = board.addComponent(Connector.Connector((38, 1), ""))
+    
+    s1 = board.addComponent(Switch.Switch((7, 10), "", Rotate.ROTATE90))
+    s2 = board.addComponent(Switch.Switch((7, 16), "", Rotate.ROTATE90)) 
+ 
+    andGate = board.addComponent(AndGate.AndGate((25, 16), "AND", Rotate.ROTATE90))
+    xorGate = board.addComponent(XorGate.XorGate((25, 10), "XOR", Rotate.ROTATE90))
+
+    # lamp for result
+       
+    lamp = board.addComponent(Lamp.Lamp((34, 10), "result", Rotate.ROTATE90))
+    
+    # lamp for carry bit
+    
+    lamp_c = board.addComponent(Lamp.Lamp((34, 16), "carry bit", Rotate.ROTATE90))
+    
+    # lamps to represent if the input is 1 or 0
+    
+    lamp1 = board.addComponent(Lamp.Lamp((13, 10), "a", Rotate.ROTATE90))
+    lamp2 = board.addComponent(Lamp.Lamp((13, 16), "b", Rotate.ROTATE90))
+ 
+    board.connect(powerSource, c1)
+     
+    board.connect(c1, s1)
+    board.connect(c1, c2)
+    board.connect(c2, s2)
+     
+    board.connect(s2, lamp2)
+    board.connect(lamp2, xorGate)
+     
+    board.connect(s1, lamp1)
+    board.connect(lamp1, xorGate)
+     
+    board.connect(lamp2, andGate) 
+    board.connect(lamp1, andGate)         
+ 
+    board.connect(andGate, lamp_c)
+    board.connect(lamp_c, c3)
+    board.connect(c3, c4)
+    
+    board.connect(c4, c5) 
+    board.connect(xorGate, lamp)
+    board.connect(lamp, c4)
+    board.connect(c5, powerSource)
+     
+    rasterCount = (39, 19)
+    rasterSize = 80
+    printSize = (rasterCount[0] * rasterSize, rasterCount[1] * rasterSize)
+ 
     return board, printSize, rasterCount, (s1, s2)
 
 def createResultBoard():
@@ -667,10 +603,11 @@ def main():
 
     # Here you can choose the board you want to have opened.
     
+    board, printSize, rasterCount, () = createSimpleBoard
     # board, printSize, rasterCount, s1 = createSwitch12Board()
     # board, printSize, rasterCount, () = createBitAddingBoard()
     # board, printSize, rasterCount, () = createCarryBitBoard()
-    board, printSize, rasterCount, (s1, s2, s3) = create3BitAddingBoard()
+    # board, printSize, rasterCount, (s1, s2, s3) = create3BitAddingBoard()
     # board, printSize, rasterCount, (s1, s2) = createCarryBitBoard()
     
     printContext = createPrintContext(printSize, rasterCount)
@@ -812,18 +749,18 @@ def createImages():
     draw(printContext, board)
     printContext.save(r"C:\Users\nikst\ws\Wechselschalter_unten.png")  
 
-    board, printSize, rasterCount, (s1, s2) = createCarryBitBoard()
+    board, printSize, rasterCount, (s1, s2) = create2BitAddingBoard()
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
     printContext.save(r"C:\Users\nikst\ws\2Bit_Addierer_geoeffnet.png")     
     
-    board, printSize, rasterCount, (s1, s2) = createCarryBitBoard()
+    board, printSize, rasterCount, (s1, s2) = create2BitAddingBoard()
     s1.setClosed(True)
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
     printContext.save(r"C:\Users\nikst\ws\2Bit_Addierer_wechsel.png")     
     
-    board, printSize, rasterCount, (s1, s2) = createCarryBitBoard()
+    board, printSize, rasterCount, (s1, s2) = create2BitAddingBoard()
     s1.setClosed(True)
     s2.setClosed(True)
     printContext = createPrintContext(printSize, rasterCount)
