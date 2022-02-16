@@ -41,6 +41,8 @@ def nextPos():
 
 def createSimpleBoard():
     
+    # simple board for testing
+    
     board = Board.Board()
     
     powerSource = board.addComponent(PowerSource.PowerSource(nextPos()))
@@ -60,6 +62,7 @@ def createSimpleBoard():
     return board, printSize, rasterCount
 
 def createBitAddingBoard():
+     
      
     board = Board.Board();
      
@@ -117,13 +120,17 @@ def createCarryBitBoard():
     c3 = board.addComponent(Connector.Connector((38, 16), ""))
     c4 = board.addComponent(Connector.Connector((38, 10), ""))
           
-    xorGate = board.addComponent(XorGate.XorGate((25, 10), "XOR", Rotate.ROTATE90))   
+    xorGate = board.addComponent(XorGate.XorGate((25, 10), "XOR", Rotate.ROTATE90))
+       
     lamp = board.addComponent(Lamp.Lamp((34, 10), "result", Rotate.ROTATE90))
-    #lamp for result
+    # lamp for result
+    
     lamp_c = board.addComponent(Lamp.Lamp((34, 16), "carry bit", Rotate.ROTATE90))
-    #lamp for carrybit
+    # lamp for carry bit
+    
     c5 = board.addComponent(Connector.Connector((38, 1), ""))
-     
+    
+    # lamps to represent if the input is 1 or 0
     lamp1 = board.addComponent(Lamp.Lamp((13, 10), "a", Rotate.ROTATE90))
     lamp2 = board.addComponent(Lamp.Lamp((13, 16), "b", Rotate.ROTATE90))
  
@@ -158,6 +165,8 @@ def createCarryBitBoard():
     return board, printSize, rasterCount, (s1, s2)
 
 def createOrGateBoard():
+
+    # OR gate made with 2 switches
     
     board = Board.Board();
     powerSource = board.addComponent(PowerSource.PowerSource((4, 4), "Power", Rotate.ROTATE90))
@@ -188,6 +197,8 @@ def createOrGateBoard():
     return board, printSize, rasterCount, (s1, s2)
 
 def createAndGateBoard():
+
+    # AND gate made with 2 switches
     
     board = Board.Board();
     powerSource = board.addComponent(PowerSource.PowerSource((4, 3), "Power", Rotate.ROTATE90))
@@ -213,6 +224,8 @@ def createAndGateBoard():
     return board, printSize, rasterCount, (s1, s2)
 
 def createNotGateBoard():
+
+    # NOT gate made with a switch
     
     board = Board.Board();
     powerSource = board.addComponent(PowerSource.PowerSource((4, 3), "Power", Rotate.ROTATE90))
@@ -236,6 +249,8 @@ def createNotGateBoard():
     return board, printSize, rasterCount, s1   
 
 def createSwitch12Board():
+
+    # board made for presenting the toogle switch
     
     board = Board.Board();
     
@@ -244,12 +259,13 @@ def createSwitch12Board():
     c1 = board.addComponent(Connector.Connector((1, 7), ""))
     c_weg1 = board.addComponent(Connector.Connector((5, 1), "1"))
     c_weg2 = board.addComponent(Connector.Connector((5, 3), "2"))
-
-    s2 = board.addComponent(Switch21.Switch21((20, 2), "B", Rotate.ROTATE90)) 
-
+    
+    c2 = board.addComponent(Connector.Connector((10, 1), "2"))
+    c3 = board.addComponent(Connector.Connector((10, 3), "2"))
+    
     c_b = board.addComponent(Connector.Connector((26, 13), ""))
      
-    lamp = board.addComponent(Lamp.Lamp((24, 2), "OUT", Rotate.ROTATE90))
+    lamp = board.addComponent(Lamp.Lamp((24, 3), "OUT", Rotate.ROTATE90))
 
     board.connect(powerSource, c1)
     
@@ -259,10 +275,11 @@ def createSwitch12Board():
     board.connect(s1, c_weg1) 
 
 
-    board.connect(c_weg2, s2)    
-    board.connect(c_weg1, s2) 
+    board.connect(c_weg2, c3)    
+    board.connect(c_weg1, c2) 
+    board.connect(c2, c3) 
      
-    board.connect(s2, lamp)
+    board.connect(c3, lamp)
     
     board.connect(lamp, c_b)
     board.connect(c_b, powerSource)  
@@ -275,6 +292,8 @@ def createSwitch12Board():
     return board, printSize, rasterCount, s1
     
 def createXorGateBoard():
+
+    # XOR gate made with toggle switches
     
     board = Board.Board();
     
@@ -310,6 +329,8 @@ def createXorGateBoard():
     return board, printSize, rasterCount, (s1, s2)
 
 def createResultBoard():
+
+    # circuit that displays the result when adding 3 Bits.
     
     board = Board.Board();
     
@@ -373,6 +394,8 @@ def createResultBoard():
 
 def createCarryBoard():
    
+    # circuit that displays the carry bit when adding 3 Bits.
+       
     board = Board.Board();
     
     powerSource = board.addComponent(PowerSource.PowerSource((4, 9), "Power", Rotate.ROTATE90))
@@ -467,7 +490,12 @@ def createCarryBoard():
 
 def create3BitAddingBoard():
     
+    # circuit that adds 3 Bits (Combination of the circuit for the carry bit
+    # and the result)
+    
     board = Board.Board();
+
+    # with addComponent() all the needed components are put on the board. 
     
     powerSource = board.addComponent(PowerSource.PowerSource((4, 24), "Power", Rotate.ROTATE90))
     
@@ -492,6 +520,8 @@ def create3BitAddingBoard():
 
     carry = board.addComponent(Lamp.Lamp((30, 36), "carry", Rotate.ROTATE270))
     result = board.addComponent(Lamp.Lamp((30, 31), "result", Rotate.ROTATE270))
+
+    # all the connectors used in this board are added below. 
 
     c_a = board.addComponent(Connector.Connector((9, 20), ""))
     c_b = board.addComponent(Connector.Connector((9, 24), ""))
@@ -526,7 +556,7 @@ def create3BitAddingBoard():
     c24 = board.addComponent(Connector.Connector((50, 36), ""))
     c25 = board.addComponent(Connector.Connector((22, 36), ""))
  
-    # curcuit for carry bit
+    # circuit for carry bit
     
     board.connect(powerSource, c_b)
     board.connect(c_b, c_a)
@@ -584,7 +614,7 @@ def create3BitAddingBoard():
     board.connect(carry, c25)
     board.connect(c25, c7)
 
-    # curcuit for result
+    # circuit for result
     
     board.connect(c_x, XnorGate1)
     board.connect(c1, XnorGate1)
@@ -606,6 +636,10 @@ def create3BitAddingBoard():
     return board, printSize, rasterCount, (s1, s2, s3)     
  
 def createPrintContext(printSize, rasterCount):
+    
+    # This are the graphic settings used for all the images in my VWA that I
+    # created. The interactive board uses different settings.
+    
     printSurface = pygame.Surface(printSize)
     printContext = GfxContext.GfxContext(printSurface, rasterCount)
     printContext.setBackgroundColour((255, 255, 255))
@@ -615,7 +649,7 @@ def createPrintContext(printSize, rasterCount):
     printContext.setConnectorColour((50, 50, 50))
     printContext.setComponentColour((50, 50, 50))
     printContext.setLampColour((50, 50, 50))
-    printContext.setActiveConnectorLineWidth(6)
+    printContext.setActiveConnectorLineWidth(4)
     printContext.setActiveConnectorColour((50, 200, 50))
     printContext.setActiveComponentColour((0, 0, 0))
     printContext.setActiveLampColour((50, 200, 50))
@@ -631,11 +665,12 @@ def main():
     
     Logger.info("creating board...")
 
+    # Here you can choose the board you want to have opened.
     
-    board, printSize, rasterCount, (s1, s2) = createSwitch12Board
+    # board, printSize, rasterCount, s1 = createSwitch12Board()
     # board, printSize, rasterCount, () = createBitAddingBoard()
     # board, printSize, rasterCount, () = createCarryBitBoard()
-    # board, printSize, rasterCount, (s1, s2, s3) = create3BitAddingBoard()
+    board, printSize, rasterCount, (s1, s2, s3) = create3BitAddingBoard()
     # board, printSize, rasterCount, (s1, s2) = createCarryBitBoard()
     
     printContext = createPrintContext(printSize, rasterCount)
@@ -650,6 +685,9 @@ def main():
 
     
     draw(screenContext, board)
+    
+    # loop that executes all needed functions to open up, print, click, or close
+    # a board  
     
     run = True
     while run:
@@ -675,7 +713,11 @@ def main():
                 if event.text == "p":
                     print ("saving image")
                     draw(printContext, board)
-                    printContext.save(r"C:\Users\nikst\ws\test2.jpeg")
+                    printContext.save(r"C:\Users\nikst\ws\board.png")
+                
+                elif event.text == "q":
+                    print ("bye")
+                    return
                 
 
                 
@@ -683,6 +725,8 @@ def main():
 
 
 def draw(g, board):
+    # generates an interactive graphic surface for a board 
+    # "g" is the graphic context that is used, which for example can be printContext.
     board.switchOn()
     g.clear()
     g.drawRaster()
@@ -691,6 +735,10 @@ def draw(g, board):
 def createImages():
     pygame.init()
     pygame.font.init()
+    
+    # If the function createImages() is executed, Images of all boards 
+    # listed below are created. The function setClosed() changes the status
+    # of the switches on the board.
         
     board, printSize, rasterCount, (s1, s2) = createAndGateBoard()
     printContext = createPrintContext(printSize, rasterCount)
@@ -727,24 +775,30 @@ def createImages():
     printContext.save(r"C:\Users\nikst\ws\OR_geschlossen.png")  
     
     board, printSize, rasterCount, (s1, s2) = createXorGateBoard()
-    s1.setPosition(1)
-    s2.setPosition(1)    
+    s1.setPosition(1)    
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
     printContext.save(r"C:\Users\nikst\ws\XOR_oben.png")  
     
     board, printSize, rasterCount, (s1, s2) = createXorGateBoard()
-    s1.setPosition(0)
-    s2.setPosition(0)
+    s2.setPosition(1)
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
     printContext.save(r"C:\Users\nikst\ws\XOR_unten.png")  
     
     board, printSize, rasterCount, (s1, s2) = createXorGateBoard()
+    s1.setPosition(1)
     s2.setPosition(1)
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
-    printContext.save(r"C:\Users\nikst\ws\XOR_wechsel.png")  
+    printContext.save(r"C:\Users\nikst\ws\XOR_wechsel1.png")  
+
+    board, printSize, rasterCount, (s1, s2) = createXorGateBoard()
+    s1.setPosition(0)
+    s2.setPosition(0)
+    printContext = createPrintContext(printSize, rasterCount)
+    draw(printContext, board)
+    printContext.save(r"C:\Users\nikst\ws\XOR_wechsel2.png") 
     
     board, printSize, rasterCount, s1 = createSwitch12Board()
     s1.setPosition(1)
@@ -834,7 +888,10 @@ def createImages():
     
 
 createResultBoard
-     
+
+# createImages() generates images of all boards listed above. 
+# main() opens an interactive board (which board is opened
+# can be changed in main() )
      
 main()
 #createImages()
