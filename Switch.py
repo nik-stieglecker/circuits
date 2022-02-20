@@ -27,7 +27,9 @@ class Switch(SingleInputComponent.SingleInputComponent):
         connLineWidth = gfx.getConnectorLineWidth(self.isOn())
         
         self.drawLineAndConnector(gfx, gfx.getConnectorColour(self.incoming[0].isOn()), gfx.getConnectorLineWidth(self.incoming[0].isOn()), (0, -1), self.getIncomingPos())
+        self.drawConnector(gfx, gfx.getConnectorColour(self.incoming[0].isOn()), (0, -1))
         self.drawLineAndConnector(gfx, connColour, connLineWidth, (0, 1), self.getOutgoingPos())
+        self.drawConnector(gfx, connColour, (0, 1))
         
         if self.closed:
             self.drawLine(gfx, gfx.getConnectorColour(self.incoming[0].isOn()), gfx.getConnectorLineWidth(self.incoming[0].isOn()), (0, -1), (0, 1))

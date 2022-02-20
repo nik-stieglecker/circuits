@@ -24,6 +24,7 @@ class Switch12(SingleInputComponent.SingleInputComponent):
         inOn = self.incoming[0].isOn()
         
         self.drawLineAndConnector(gfx, gfx.getConnectorColour(inOn), gfx.getConnectorLineWidth(inOn), (0, -1), self.getIncomingPos())
+        self.drawConnector(gfx, gfx.getConnectorColour(inOn), (0, -1))
         
         if self.position == 0:
             self.drawLine(gfx, gfx.getConnectorColour(inOn), gfx.getConnectorLineWidth(inOn), (0, -1), (-1, 1))
@@ -32,9 +33,11 @@ class Switch12(SingleInputComponent.SingleInputComponent):
 
         outOn = inOn and self.position == 0
         self.drawLineAndConnector(gfx, gfx.getConnectorColour(outOn), gfx.getConnectorLineWidth(outOn), (-1, 1), self.getOutgoingPos(0))
+        self.drawConnector(gfx, gfx.getConnectorColour(outOn), (-1, 1))
 
         outOn = inOn and self.position == 1
         self.drawLineAndConnector(gfx, gfx.getConnectorColour(outOn), gfx.getConnectorLineWidth(outOn), (1, 1), self.getOutgoingPos(1))
+        self.drawConnector(gfx, gfx.getConnectorColour(outOn), (1, 1))
     
         self.drawLine(gfx, gfx.getConnectorColour(inOn), gfx.getConnectorLineWidth(inOn), (-1.5, -1.5), (1.5, -1.5))
         self.drawLine(gfx, gfx.getConnectorColour(inOn), gfx.getConnectorLineWidth(inOn), (1.5, -1.5), (1.5, 1.5))

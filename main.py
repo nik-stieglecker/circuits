@@ -603,15 +603,16 @@ def main():
 
     # Here you can choose the board you want to have opened.
     
-    board, printSize, rasterCount, () = createSimpleBoard
+    # board, printSize, rasterCount, (s1, s2, s3) = create3BitAddingBoard()
     # board, printSize, rasterCount, s1 = createSwitch12Board()
     # board, printSize, rasterCount, () = createBitAddingBoard()
     # board, printSize, rasterCount, () = createCarryBitBoard()
     # board, printSize, rasterCount, (s1, s2, s3) = create3BitAddingBoard()
     # board, printSize, rasterCount, (s1, s2) = createCarryBitBoard()
+    board, printSize, rasterCount, (s1, s2) = createXorGateBoard()
     
     printContext = createPrintContext(printSize, rasterCount)
-    screenRasterFactor = 1500/printContext.getSurfaceSize()[0]
+    screenRasterFactor = 800/printContext.getSurfaceSize()[0]
     surface = pygame.display.set_mode((round(printContext.getSurfaceSize()[0]*screenRasterFactor), round(printContext.getSurfaceSize()[1]*screenRasterFactor)))
     screenContext = GfxContext.GfxContext(surface, printContext.getRasterCount())  
     
@@ -831,5 +832,5 @@ createResultBoard
 # main() opens an interactive board (which board is opened
 # can be changed in main() )
      
-#main()
-createImages()
+main()
+#createImages()

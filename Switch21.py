@@ -30,9 +30,11 @@ class Switch21(DualInputComponent.DualInputComponent):
         (x0, y0) = self.getIncomingPos(0)
         y0 = y0 + 1
         self.drawLineAndConnector(gfx, gfx.getConnectorColour(self.incoming[0].isOn()), gfx.getConnectorLineWidth(self.incoming[0].isOn()), (x0, y0), self.getIncomingPos(0))
+        self.drawConnector(gfx, gfx.getConnectorColour(self.incoming[0].isOn()), (x0, y0))
         (x1, y1) = self.getIncomingPos(1)
         y1 = y1 + 1
         self.drawLineAndConnector(gfx, gfx.getConnectorColour(self.incoming[1].isOn()), gfx.getConnectorLineWidth(self.incoming[1].isOn()), (x1, y1), self.getIncomingPos(1))
+        self.drawConnector(gfx, gfx.getConnectorColour(self.incoming[1].isOn()), (x1, y1))
         
         if self.position == 0:
             self.drawLine(gfx, gfx.getConnectorColour(self.incoming[0].isOn()), gfx.getConnectorLineWidth(self.incoming[0].isOn()), (x0, y0), (0, 1))
@@ -40,6 +42,7 @@ class Switch21(DualInputComponent.DualInputComponent):
             self.drawLine(gfx, gfx.getConnectorColour(self.incoming[1].isOn()), gfx.getConnectorLineWidth(self.incoming[1].isOn()), (x1, y1), (0, 1))
 
         self.drawLineAndConnector(gfx, connColour, connLineWidth, (0, 1), self.getOutgoingPos())
+        self.drawConnector(gfx, connColour, (0, 1))
         
         inOn = self.isOn()
         self.drawLine(gfx, gfx.getConnectorColour(inOn), gfx.getConnectorLineWidth(inOn), (-1.5, -1.5), (1.5, -1.5))
