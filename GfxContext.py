@@ -1,6 +1,4 @@
 import pygame
-import Component
-import Board
 
 class GfxContext():
     
@@ -81,7 +79,7 @@ class GfxContext():
     
     def drawRasterLine(self, colour, width, start, end):
         """Draw line in raster coordinates."""
-        
+        # print ("Draw line start: {0} end: {1} width: {2} colour: {3}".format(start, end, width, colour))
         pygame.draw.line(self.surface, colour, self.rasterToSurface(start), self.rasterToSurface(end), width)
     
     def drawRasterCircle(self, colour, pos, radius, width):

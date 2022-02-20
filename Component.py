@@ -111,18 +111,30 @@ class Component:
             # end = o.getIncomingPosByComponent(self)
             toComponent = o.getToComponent()
             end = toComponent.getIncomingPosByConnection(o)
-            gfx.drawRasterLine(gfx.getConnectorColour(o.isOn()), gfx.getConnectorLineWidth(o.isOn()), self.localToGlobalRaster(start), toComponent.localToGlobalRaster(end))
+            width = gfx.getConnectorLineWidth(o.isOn())
+            (rx1, ry1) = self.localToGlobalRaster(start)
+            (rx2, ry2) = toComponent.localToGlobalRaster(end)
+            dx = rx2 - rx1
+            dy = ry2 - ry1
+            # clear background of line
+            if abs(dx) > 0.5 or abs(dy) > 0.5:
+                bg = gfx.getBackgroundColour()
+                # bg = (255, 255, 0)
+                gfx.drawRasterLine(bg, width*5, (rx1 + 0.1*dx, ry1 + 0.1*dy), (rx1 + 0.9*dx, ry1 + 0.9*dy))
+            gfx.drawRasterLine(gfx.getConnectorColour(o.isOn()), width, (rx1, ry1), (rx2, ry2))
             number += 1
     
     def drawLine(self, gfx, colour, width, start, end):
         gfx.drawRasterLine(colour, width, self.localToGlobalRaster(start), self.localToGlobalRaster(end))
+        
     
     def drawLineAndConnector(self, gfx, colour, width, start, end):
         self.drawLine(gfx, colour, width, start, end)
-        self.drawConnector(gfx, colour, end)
+        #self.drawConnector(gfx, colour, end)
     
     def drawConnector(self, gfx, colour, pos):
         gfx.drawRasterCircle(colour, self.localToGlobalRaster(pos), 0.1, 0)
+        
         
     def drawText(self, gfx, center, text):
         gfx.drawRasterText(self.localToGlobalRaster(center), text)

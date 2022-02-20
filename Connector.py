@@ -16,7 +16,7 @@ class Connector(Component.Component):
     
     def draw(self, gfx):
         colour = gfx.getConnectorColour(self.isOn())
-        self.drawConnector(gfx, colour, (0, 0))
+        # self.drawConnector(gfx, colour, (0, 0))
         
         self.drawText(gfx, (0, 1), self.name)
     

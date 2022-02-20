@@ -35,8 +35,8 @@ class Lamp (SingleInputComponent.SingleInputComponent):
         if not self.isOn():
             circleWidth = gfx.getConnectorLineWidth(False)
         self.drawLineAndConnector(gfx,
-                                  gfx.getConnectorColour(self.incoming[0].isOn()),
-                                  gfx.getConnectorLineWidth(self.incoming[0].isOn()),
+                                  connColour,
+                                  connLineWidth,
                                   (0, -1), self.getIncomingPos())
         self.drawLineAndConnector(gfx, connColour, connLineWidth, (0, 1), self.getOutgoingPos())
         gfx.drawRasterCircle(gfx.getLampColour(self.isOn()), self.localToGlobalRaster((0, 0)), 1, circleWidth)

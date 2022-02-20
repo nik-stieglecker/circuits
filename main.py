@@ -12,15 +12,14 @@ import Connector
 import GfxContext
 import Lamp
 import Logger
-import NotGate
+import OrGate
 import PowerSource
 from Rotate import Rotate
 import Switch
 import Switch12
 import Switch21
-import XorGate
 import XnorGate
-import OrGate
+import XorGate
 
 
 rasterInc = 10
@@ -571,6 +570,33 @@ def create3BitAddingBoard():
 
     return board, printSize, rasterCount, (s1, s2, s3)     
  
+def createSimpleBoard():
+    
+    # circuit that adds 3 Bits (Combination of the circuit for the carry bit
+    # and the result)
+    
+    board = Board.Board();
+
+    # with addComponent() all the needed components are put on the board. 
+    
+    powerSource = board.addComponent(PowerSource.PowerSource((4, 24), "POWER", Rotate.ROTATE90))
+    
+    # c1 = board.addComponent(Switch.Switch((11, 20), "s1", Rotate.ROTATE90))
+    # c1 = board.addComponent(Switch.Switch((15, 20), "s2", Rotate.ROTATE90))
+    c1 = board.addComponent(Lamp.Lamp((11, 20), "l1", Rotate.ROTATE90))
+    c2 = board.addComponent(Lamp.Lamp((15, 20), "l2", Rotate.ROTATE90))
+
+    board.connect(powerSource, c1)
+    board.connect(c1, c2)
+    board.connect(c2, powerSource)
+    
+    
+    rasterCount = (51, 38)
+    rasterSize = 80
+    printSize = (rasterCount[0] * rasterSize, rasterCount[1] * rasterSize)
+
+    return board, printSize, rasterCount, (c1)     
+ 
 def createPrintContext(printSize, rasterCount):
     
     # This are the graphic settings used for all the images in my VWA that I
@@ -603,16 +629,16 @@ def main():
 
     # Here you can choose the board you want to have opened.
     
+    # board, printSize, rasterCount, (s1) = createSimpleBoard()
     # board, printSize, rasterCount, (s1, s2, s3) = create3BitAddingBoard()
     # board, printSize, rasterCount, s1 = createSwitch12Board()
     # board, printSize, rasterCount, () = createBitAddingBoard()
     # board, printSize, rasterCount, () = createCarryBitBoard()
-    # board, printSize, rasterCount, (s1, s2, s3) = create3BitAddingBoard()
-    # board, printSize, rasterCount, (s1, s2) = createCarryBitBoard()
-    board, printSize, rasterCount, (s1, s2) = createXorGateBoard()
+    board, printSize, rasterCount, (s1, s2, s3) = create3BitAddingBoard()
+    # board, printSize, rasterCount, (s1, s2) = createXorGateBoard()
     
     printContext = createPrintContext(printSize, rasterCount)
-    screenRasterFactor = 800/printContext.getSurfaceSize()[0]
+    screenRasterFactor = 1500/printContext.getSurfaceSize()[0]
     surface = pygame.display.set_mode((round(printContext.getSurfaceSize()[0]*screenRasterFactor), round(printContext.getSurfaceSize()[1]*screenRasterFactor)))
     screenContext = GfxContext.GfxContext(surface, printContext.getRasterCount())  
     
