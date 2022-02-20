@@ -278,8 +278,8 @@ def createResultBoard():
     lamp_b = board.addComponent(Lamp.Lamp((18, 6), "b", Rotate.ROTATE90))
     lamp_c = board.addComponent(Lamp.Lamp((18, 10), "c", Rotate.ROTATE90))
 
-    xnorGate1 = board.addComponent(XnorGate.XnorGate((24, 3), "XNOR", Rotate.ROTATE90))
-    xnorGate2 = board.addComponent(XnorGate.XnorGate((32, 5), "XNOR", Rotate.ROTATE90))
+    xorGate1 = board.addComponent(XorGate.XorGate((24, 3), "XOR", Rotate.ROTATE90))
+    xorGate2 = board.addComponent(XorGate.XorGate((32, 5), "XOR", Rotate.ROTATE90))
     
     out = board.addComponent(Lamp.Lamp((38, 5), "result", Rotate.ROTATE90))
     c1 = board.addComponent(Connector.Connector((12, 2), ""))
@@ -305,17 +305,17 @@ def createResultBoard():
     board.connect(s3, lamp_c)
 
     board.connect(lamp_b, c_xnor1)
-    board.connect(c_xnor1, xnorGate1) 
+    board.connect(c_xnor1, xorGate1) 
     
-    board.connect(lamp_a, xnorGate1)
+    board.connect(lamp_a, xorGate1)
     board.connect(lamp_c, c4)
     
     board.connect(c4, c5) 
-    board.connect(c5, xnorGate2)
-    board.connect(xnorGate1, c_xnor2)
-    board.connect(c_xnor2, xnorGate2) 
+    board.connect(c5, xorGate2)
+    board.connect(xorGate1, c_xnor2)
+    board.connect(c_xnor2, xorGate2) 
  
-    board.connect(xnorGate2, out)
+    board.connect(xorGate2, out)
     board.connect(out, c6) 
     board.connect(c6, c7)
     board.connect(c7, powerSource) 
@@ -450,8 +450,8 @@ def create3BitAddingBoard():
     OrGate1 = board.addComponent(OrGate.OrGate((40, 4), "OR", Rotate.ROTATE90))
     OrGate2 = board.addComponent(OrGate.OrGate((47, 5), "OR", Rotate.ROTATE90))
     
-    XnorGate1 = board.addComponent(XnorGate.XnorGate((26, 21), "XNOR", Rotate.ROTATE90))
-    XnorGate2 = board.addComponent(XnorGate.XnorGate((33, 22), "XNOR", Rotate.ROTATE90))
+    XorGate1 = board.addComponent(XorGate.XorGate((26, 21), "XOR", Rotate.ROTATE90))
+    XorGate2 = board.addComponent(XorGate.XorGate((33, 22), "XOR", Rotate.ROTATE90))
 
     carry = board.addComponent(Lamp.Lamp((30, 36), "carry", Rotate.ROTATE270))
     result = board.addComponent(Lamp.Lamp((30, 31), "result", Rotate.ROTATE270))
@@ -551,13 +551,13 @@ def create3BitAddingBoard():
 
     # circuit for result
     
-    board.connect(c_x, XnorGate1)
-    board.connect(c1, XnorGate1)
+    board.connect(c_x, XorGate1)
+    board.connect(c1, XorGate1)
     board.connect(c3, c4)
     board.connect(c4, c5)
-    board.connect(c5, XnorGate2)
-    board.connect(XnorGate1, XnorGate2)
-    board.connect(XnorGate2, c6)
+    board.connect(c5, XorGate2)
+    board.connect(XorGate1, XorGate2)
+    board.connect(XorGate2, c6)
     board.connect(c6, result)
     board.connect(result, c7)
     board.connect(c7, c8)
@@ -569,33 +569,6 @@ def create3BitAddingBoard():
     printSize = (rasterCount[0] * rasterSize, rasterCount[1] * rasterSize)
 
     return board, printSize, rasterCount, (s1, s2, s3)     
- 
-def createSimpleBoard():
-    
-    # circuit that adds 3 Bits (Combination of the circuit for the carry bit
-    # and the result)
-    
-    board = Board.Board();
-
-    # with addComponent() all the needed components are put on the board. 
-    
-    powerSource = board.addComponent(PowerSource.PowerSource((4, 24), "POWER", Rotate.ROTATE90))
-    
-    # c1 = board.addComponent(Switch.Switch((11, 20), "s1", Rotate.ROTATE90))
-    # c1 = board.addComponent(Switch.Switch((15, 20), "s2", Rotate.ROTATE90))
-    c1 = board.addComponent(Lamp.Lamp((11, 20), "l1", Rotate.ROTATE90))
-    c2 = board.addComponent(Lamp.Lamp((15, 20), "l2", Rotate.ROTATE90))
-
-    board.connect(powerSource, c1)
-    board.connect(c1, c2)
-    board.connect(c2, powerSource)
-    
-    
-    rasterCount = (51, 38)
-    rasterSize = 80
-    printSize = (rasterCount[0] * rasterSize, rasterCount[1] * rasterSize)
-
-    return board, printSize, rasterCount, (c1)     
  
 def createPrintContext(printSize, rasterCount):
     
@@ -638,7 +611,7 @@ def main():
     # board, printSize, rasterCount, (s1, s2) = createXorGateBoard()
     
     printContext = createPrintContext(printSize, rasterCount)
-    screenRasterFactor = 1500/printContext.getSurfaceSize()[0]
+    screenRasterFactor = 1200/printContext.getSurfaceSize()[0]
     surface = pygame.display.set_mode((round(printContext.getSurfaceSize()[0]*screenRasterFactor), round(printContext.getSurfaceSize()[1]*screenRasterFactor)))
     screenContext = GfxContext.GfxContext(surface, printContext.getRasterCount())  
     
@@ -858,5 +831,5 @@ createResultBoard
 # main() opens an interactive board (which board is opened
 # can be changed in main() )
      
-main()
-#createImages()
+#main()
+createImages()
