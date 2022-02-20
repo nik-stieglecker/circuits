@@ -45,12 +45,12 @@ def createAndGateBoard():
     
     board = Board.Board();
     powerSource = board.addComponent(PowerSource.PowerSource((4, 3), "POWER", Rotate.ROTATE90))
-    s1 = board.addComponent(Switch.Switch((9, 3), "A", Rotate.ROTATE90))
-    s2 = board.addComponent(Switch.Switch((13, 3), "B", Rotate.ROTATE90))
+    s1 = board.addComponent(Switch.Switch((9, 3), "a", Rotate.ROTATE90))
+    s2 = board.addComponent(Switch.Switch((13, 3), "b", Rotate.ROTATE90))
     c1 = board.addComponent(Connector.Connector((17, 3), ""))
     c2 = board.addComponent(Connector.Connector((17, 8), ""))       
     c3 = board.addComponent(Connector.Connector((1, 8), ""))
-    out = board.addComponent(Lamp.Lamp((11 ,8 ), "OUT", Rotate.ROTATE270))        
+    out = board.addComponent(Lamp.Lamp((11 ,8 ), "out", Rotate.ROTATE270))        
     
     board.connect(powerSource, s1)    
     board.connect(s1, s2)
@@ -73,13 +73,13 @@ def createOrGateBoard():
     board = Board.Board();
     powerSource = board.addComponent(PowerSource.PowerSource((4, 4), "POWER", Rotate.ROTATE90))
     c1 = board.addComponent(Connector.Connector((8, 4), ""))
-    s1 = board.addComponent(Switch.Switch((10, 2), "A", Rotate.ROTATE90))
-    s2 = board.addComponent(Switch.Switch((10, 6), "B", Rotate.ROTATE90))
+    s1 = board.addComponent(Switch.Switch((10, 2), "a", Rotate.ROTATE90))
+    s2 = board.addComponent(Switch.Switch((10, 6), "b", Rotate.ROTATE90))
     c2 = board.addComponent(Connector.Connector((12, 4), ""))
     c3 = board.addComponent(Connector.Connector((13, 4), ""))
     c4 = board.addComponent(Connector.Connector((13, 9), ""))
     c5 = board.addComponent(Connector.Connector((1, 9), ""))
-    out = board.addComponent(Lamp.Lamp((7 , 9), "OUT", Rotate.ROTATE270))        
+    out = board.addComponent(Lamp.Lamp((7 , 9), "out", Rotate.ROTATE270))        
 
     board.connect(powerSource, c1)
     board.connect(c1, s1)
@@ -104,10 +104,10 @@ def createNotGateBoard():
     
     board = Board.Board();
     powerSource = board.addComponent(PowerSource.PowerSource((4, 3), "POWER", Rotate.ROTATE90))
-    s1 = board.addComponent(Switch.Switch((10, 3), "A", Rotate.ROTATE90, True))
+    s1 = board.addComponent(Switch.Switch((10, 3), "a", Rotate.ROTATE90, True))
     c1 = board.addComponent(Connector.Connector((12, 8), ""))
     c2 = board.addComponent(Connector.Connector((1, 8), ""))
-    out = board.addComponent(Lamp.Lamp((7 ,8 ), "OUT", Rotate.ROTATE270))        
+    out = board.addComponent(Lamp.Lamp((7 ,8 ), "out", Rotate.ROTATE270))        
 
 
     board.connect(powerSource, s1)
@@ -130,7 +130,7 @@ def createSwitch12Board():
     board = Board.Board();
     
     powerSource = board.addComponent(PowerSource.PowerSource((3, 10), "POWER", Rotate.ROTATE180))
-    s1 = board.addComponent(Switch12.Switch12((3, 2), "A", Rotate.ROTATE90))
+    s1 = board.addComponent(Switch12.Switch12((3, 2), "a", Rotate.ROTATE90))
     c1 = board.addComponent(Connector.Connector((1, 7), ""))
     c_weg1 = board.addComponent(Connector.Connector((5, 1), "1"))
     c_weg2 = board.addComponent(Connector.Connector((5, 3), "2"))
@@ -140,7 +140,7 @@ def createSwitch12Board():
     
     c_b = board.addComponent(Connector.Connector((26, 13), ""))
      
-    lamp = board.addComponent(Lamp.Lamp((24, 3), "OUT", Rotate.ROTATE90))
+    lamp = board.addComponent(Lamp.Lamp((24, 3), "out", Rotate.ROTATE90))
 
     board.connect(powerSource, c1)
     
@@ -173,14 +173,14 @@ def createXorGateBoard():
     
     powerSource = board.addComponent(PowerSource.PowerSource((3, 5), "POWER", Rotate.ROTATE180))
     c1 = board.addComponent(Connector.Connector((8, 2), ""))
-    s1 = board.addComponent(Switch12.Switch12((10, 2), "A", Rotate.ROTATE90))
+    s1 = board.addComponent(Switch12.Switch12((10, 2), "a", Rotate.ROTATE90))
 
 
-    s2 = board.addComponent(Switch21.Switch21((20, 2), "B", Rotate.ROTATE90)) 
+    s2 = board.addComponent(Switch21.Switch21((20, 2), "b", Rotate.ROTATE90)) 
 
     c_b = board.addComponent(Connector.Connector((26, 8), ""))
      
-    lamp = board.addComponent(Lamp.Lamp((24, 2), "OUT", Rotate.ROTATE90))
+    lamp = board.addComponent(Lamp.Lamp((24, 2), "out", Rotate.ROTATE90))
 
     board.connect(powerSource, c1)
     
@@ -223,11 +223,11 @@ def create2BitAddingBoard():
 
     # lamp for result
        
-    lamp = board.addComponent(Lamp.Lamp((34, 10), "RESULT", Rotate.ROTATE90))
+    lamp = board.addComponent(Lamp.Lamp((34, 10), "result", Rotate.ROTATE90))
     
     # lamp for carry bit
     
-    lamp_c = board.addComponent(Lamp.Lamp((34, 16), "CARRY BIT", Rotate.ROTATE90))
+    lamp_c = board.addComponent(Lamp.Lamp((34, 16), "carry", Rotate.ROTATE90))
     
     # lamps to represent if the input is 1 or 0
     
@@ -282,7 +282,7 @@ def createResultBoard():
     xnorGate1 = board.addComponent(XnorGate.XnorGate((24, 3), "XNOR", Rotate.ROTATE90))
     xnorGate2 = board.addComponent(XnorGate.XnorGate((32, 5), "XNOR", Rotate.ROTATE90))
     
-    out = board.addComponent(Lamp.Lamp((38, 5), "RESULT", Rotate.ROTATE90))
+    out = board.addComponent(Lamp.Lamp((38, 5), "result", Rotate.ROTATE90))
     c1 = board.addComponent(Connector.Connector((12, 2), ""))
     c2 = board.addComponent(Connector.Connector((12, 6), ""))
     c3 = board.addComponent(Connector.Connector((12, 10), ""))
@@ -367,7 +367,7 @@ def createCarryBoard():
     c14 = board.addComponent(Connector.Connector((36, 6), ""))    
     c15 = board.addComponent(Connector.Connector((43, 20), ""))    
     c16 = board.addComponent(Connector.Connector((1, 20), ""))    
-    carry = board.addComponent(Lamp.Lamp((22, 20), "CARRY BIT", Rotate.ROTATE270))
+    carry = board.addComponent(Lamp.Lamp((22, 20), "carry", Rotate.ROTATE270))
 
     board.connect(powerSource, c_b)
     board.connect(c_b, c_a)
@@ -454,8 +454,8 @@ def create3BitAddingBoard():
     XnorGate1 = board.addComponent(XnorGate.XnorGate((26, 21), "XNOR", Rotate.ROTATE90))
     XnorGate2 = board.addComponent(XnorGate.XnorGate((33, 22), "XNOR", Rotate.ROTATE90))
 
-    carry = board.addComponent(Lamp.Lamp((30, 36), "CARRY BIT", Rotate.ROTATE270))
-    result = board.addComponent(Lamp.Lamp((30, 31), "RESULT", Rotate.ROTATE270))
+    carry = board.addComponent(Lamp.Lamp((30, 36), "carry", Rotate.ROTATE270))
+    result = board.addComponent(Lamp.Lamp((30, 31), "result", Rotate.ROTATE270))
 
     # all the connectors used in this board are added below. 
 
@@ -690,6 +690,7 @@ def createImages():
     printContext.save(r"C:\Users\nikst\ws\AND_geschlossen.png")  
      
     board, printSize, rasterCount, s1 = createNotGateBoard()
+    s1.setClosed(False)
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
     printContext.save(r"C:\Users\nikst\ws\NOT_geoeffnet.png")  
@@ -830,5 +831,5 @@ createResultBoard
 # main() opens an interactive board (which board is opened
 # can be changed in main() )
      
-main()
-#createImages()
+#main()
+createImages()
