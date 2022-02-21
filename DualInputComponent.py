@@ -19,7 +19,7 @@ class DualInputComponent(Component.Component):
         connLineWidth = gfx.getConnectorLineWidth(self.isOn())
         left, top = self.localToGlobalRaster((-2, -2))
         right, bottom = self.localToGlobalRaster((2, 2))
-        gfx.drawRasterRect(compColour, (left, top), (right, bottom))
+        gfx.drawRasterRect(compColour, connLineWidth, (left, top), (right, bottom))
         
         self.drawLineAndConnector(gfx, gfx.getConnectorColour(self.incoming[0].isOn()), gfx.getConnectorLineWidth(self.incoming[0].isOn()), (-1, -2), self.getIncomingPos(0))
         self.drawLineAndConnector(gfx, gfx.getConnectorColour(self.incoming[1].isOn()), gfx.getConnectorLineWidth(self.incoming[1].isOn()), (1, -2), self.getIncomingPos(1))

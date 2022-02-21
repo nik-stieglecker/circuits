@@ -85,7 +85,7 @@ class GfxContext():
     def drawRasterCircle(self, colour, pos, radius, width):
         pygame.draw.circle(self.surface, colour, self.rasterToSurface(pos), self.rasterSize[1] * radius, width)      
 
-    def drawRasterRect(self, colour, leftTop, rightBottom):
+    def drawRasterRect(self, colour, lineWidth, leftTop, rightBottom):
         """Draw rectangle in raster coordinates.
         
         Note: Rect is also in raster units.
@@ -97,7 +97,7 @@ class GfxContext():
         
         if top > bottom:
             top, bottom = bottom, top
-        pygame.draw.rect(self.surface, colour, (left, top, right - left, bottom - top), 1)
+        pygame.draw.rect(self.surface, colour, (left, top, right - left, bottom - top), lineWidth)
 
             
     def drawRasterText(self, center, text):

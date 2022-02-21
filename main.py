@@ -581,9 +581,10 @@ def createPrintContext(printSize, rasterCount):
     printContext.setRasterColour((255, 255, 255))
     printContext.setRasterColourHigh((255, 255, 255))
     printContext.setConnectorLineWidth(4)
-    printContext.setConnectorColour((50, 50, 50))
-    printContext.setComponentColour((50, 50, 50))
-    printContext.setLampColour((50, 50, 50))
+    printContext.setConnectorColour((0, 0, 0))
+    printContext.setComponentColour((0, 0, 0))
+    printContext.setFontColour((0, 0, 0))
+    printContext.setLampColour((0, 0, 0))
     printContext.setActiveConnectorLineWidth(4)
     printContext.setActiveConnectorColour((50, 200, 50))
     printContext.setActiveComponentColour((0, 0, 0))
@@ -591,7 +592,7 @@ def createPrintContext(printSize, rasterCount):
     
     return printContext
 
-def main():
+def main(path):
     
     pygame.init()
     pygame.font.init()
@@ -650,7 +651,7 @@ def main():
                 if event.text == "p":
                     print ("saving image")
                     draw(printContext, board)
-                    printContext.save(r"C:\Users\nikst\ws\board.png")
+                    printContext.save(path +"board.png")
                 
                 elif event.text == "q":
                     print ("bye")
@@ -669,7 +670,7 @@ def draw(g, board):
     g.drawRaster()
     board.draw(g)    
 
-def createImages():
+def createImages(path):
     pygame.init()
     pygame.font.init()
     
@@ -680,98 +681,98 @@ def createImages():
     board, printSize, rasterCount, (s1, s2) = createAndGateBoard()
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
-    printContext.save(r"C:\Users\nikst\ws\AND_geoeffnet.png")  
+    printContext.save(path + "AND_geoeffnet.png")  
      
     board, printSize, rasterCount, (s1, s2) = createAndGateBoard()
     s1.setClosed(True)
     s2.setClosed(True)    
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
-    printContext.save(r"C:\Users\nikst\ws\AND_geschlossen.png")  
+    printContext.save(path + "AND_geschlossen.png")  
      
     board, printSize, rasterCount, s1 = createNotGateBoard()
     s1.setClosed(False)
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
-    printContext.save(r"C:\Users\nikst\ws\NOT_geoeffnet.png")  
+    printContext.save(path + "NOT_geoeffnet.png")  
      
     board, printSize, rasterCount, (s1) = createNotGateBoard()
     s1.setClosed(True)
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
-    printContext.save(r"C:\Users\nikst\ws\NOT_geschlossen.png")  
+    printContext.save(path + "NOT_geschlossen.png")  
      
     board, printSize, rasterCount, (s1, s2) = createOrGateBoard()
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
-    printContext.save(r"C:\Users\nikst\ws\OR_geoeffnet.png")  
+    printContext.save(path + "OR_geoeffnet.png")  
      
     board, printSize, rasterCount, (s1, s2) = createOrGateBoard()
     s1.setClosed(True)
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
-    printContext.save(r"C:\Users\nikst\ws\OR_geschlossen.png")  
+    printContext.save(path + "OR_geschlossen.png")  
     
     board, printSize, rasterCount, (s1, s2) = createXorGateBoard()
     s1.setPosition(1)    
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
-    printContext.save(r"C:\Users\nikst\ws\XOR_oben.png")  
+    printContext.save(path + "XOR_oben.png")  
     
     board, printSize, rasterCount, (s1, s2) = createXorGateBoard()
     s2.setPosition(1)
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
-    printContext.save(r"C:\Users\nikst\ws\XOR_unten.png")  
+    printContext.save(path + "XOR_unten.png")  
     
     board, printSize, rasterCount, (s1, s2) = createXorGateBoard()
     s1.setPosition(1)
     s2.setPosition(1)
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
-    printContext.save(r"C:\Users\nikst\ws\XOR_wechsel1.png")  
+    printContext.save(path + "XOR_wechsel1.png")  
 
     board, printSize, rasterCount, (s1, s2) = createXorGateBoard()
     s1.setPosition(0)
     s2.setPosition(0)
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
-    printContext.save(r"C:\Users\nikst\ws\XOR_wechsel2.png") 
+    printContext.save(path + "XOR_wechsel2.png") 
     
     board, printSize, rasterCount, s1 = createSwitch12Board()
     s1.setPosition(1)
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
-    printContext.save(r"C:\Users\nikst\ws\Wechselschalter_oben.png")  
+    printContext.save(path + "Wechselschalter_oben.png")  
     
     board, printSize, rasterCount, s1 = createSwitch12Board()
     s1.setPosition(0)
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
-    printContext.save(r"C:\Users\nikst\ws\Wechselschalter_unten.png")  
+    printContext.save(path + "Wechselschalter_unten.png")  
 
     board, printSize, rasterCount, (s1, s2) = create2BitAddingBoard()
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
-    printContext.save(r"C:\Users\nikst\ws\2Bit_Addierer_geoeffnet.png")     
+    printContext.save(path + "2Bit_Addierer_geoeffnet.png")     
     
     board, printSize, rasterCount, (s1, s2) = create2BitAddingBoard()
     s1.setClosed(True)
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
-    printContext.save(r"C:\Users\nikst\ws\2Bit_Addierer_wechsel.png")     
+    printContext.save(path + "2Bit_Addierer_wechsel.png")     
     
     board, printSize, rasterCount, (s1, s2) = create2BitAddingBoard()
     s1.setClosed(True)
     s2.setClosed(True)
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
-    printContext.save(r"C:\Users\nikst\ws\2Bit_Addierer_geschlossen.png") 
+    printContext.save(path + "2Bit_Addierer_geschlossen.png") 
     
     board, printSize, rasterCount, (s1, s2, s3) = createResultBoard()
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
-    printContext.save(r"C:\Users\nikst\ws\result_geoeffnet.png") 
+    printContext.save(path + "result_geoeffnet.png") 
     
     board, printSize, rasterCount, (s1, s2, s3) = createResultBoard()
     s1.setClosed(True)
@@ -779,7 +780,7 @@ def createImages():
     s3.setClosed(True)
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
-    printContext.save(r"C:\Users\nikst\ws\result_geschlossen.png") 
+    printContext.save(path + "result_geschlossen.png") 
     
     board, printSize, rasterCount, (s1, s2, s3) = createCarryBoard()
     s1.setClosed(True)
@@ -787,25 +788,25 @@ def createImages():
     s3.setClosed(True)
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
-    printContext.save(r"C:\Users\nikst\ws\carry_geoeffnet.png") 
+    printContext.save(path + "carry_geoeffnet.png") 
     
     board, printSize, rasterCount, (s1, s2, s3) = createCarryBoard()
     s1.setClosed(True)
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
-    printContext.save(r"C:\Users\nikst\ws\carry_geschlossen1.png") 
+    printContext.save(path + "carry_geschlossen1.png") 
     
     board, printSize, rasterCount, (s1, s2, s3) = createCarryBoard()
     s1.setClosed(True)
     s2.setClosed(True)
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
-    printContext.save(r"C:\Users\nikst\ws\carry_geschlossen2.png") 
+    printContext.save(path + "carry_geschlossen2.png") 
     
     board, printSize, rasterCount, (s1, s2, s3) = create3BitAddingBoard()
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
-    printContext.save(r"C:\Users\nikst\ws\3Bit_Addierer_geoeffnet.png") 
+    printContext.save(path + "3Bit_Addierer_geoeffnet.png") 
     
     board, printSize, rasterCount, (s1, s2, s3) = create3BitAddingBoard()
     s1.setClosed(True)
@@ -813,23 +814,21 @@ def createImages():
     s3.setClosed(True)
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
-    printContext.save(r"C:\Users\nikst\ws\3Bit_Addierer_geschlossen.png") 
+    printContext.save(path + "3Bit_Addierer_geschlossen.png") 
     
     board, printSize, rasterCount, (s1, s2, s3) = create3BitAddingBoard()
     s1.setClosed(True)
     s2.setClosed(True)
     printContext = createPrintContext(printSize, rasterCount)
     draw(printContext, board)
-    printContext.save(r"C:\Users\nikst\ws\3Bit_Addierer_wechsel.png") 
+    printContext.save(path + "3Bit_Addierer_wechsel.png") 
     
     
     
-
-createResultBoard
 
 # createImages() generates images of all boards listed above. 
 # main() opens an interactive board (which board is opened
 # can be changed in main() )
      
-#main()
-createImages()
+#main("C:/Users/nikst/ws/")
+createImages("C:/Users/nikst/ws/")

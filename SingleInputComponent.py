@@ -20,7 +20,7 @@ class SingleInputComponent(Component.Component):
         
         left, top = self.localToGlobalRaster((-2, -2))
         right, bottom = self.localToGlobalRaster((2, 2))
-        gfx.drawRasterRect(compColour, (left, top), (right, bottom))
+        gfx.drawRasterRect(compColour, connLineWidth, (left, top), (right, bottom))
         
         self.drawLineAndConnector(gfx, gfx.getConnectorColour(self.incoming[0].isOn()), gfx.getConnectorLineWidth(self.incoming[0].isOn()), (0, -2), self.getIncomingPos())
         self.drawLineAndConnector(gfx, connColour, connLineWidth, (0, 2), self.getOutgoingPos())
